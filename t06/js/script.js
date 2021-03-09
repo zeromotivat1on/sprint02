@@ -1,43 +1,43 @@
-var full_name = prompt("Enter your first and last name");
-var arr_full_name = full_name.split(" ");
-console.log(arr_full_name);
+let name = prompt("Enter your first name", '');
+let surname = prompt("Enter your last name", '');
 var error = "Wrong input!";
+
+let temp = isValid(name);
+if (temp == null) {
+    console.log(error);
+    alert(error);
+} else {
+    temp = isValid(surname);
+    if (temp === null) {
+        console.log(error);
+        alert(error);
+    } else {
+        greetings(name, surname);
+    }
+}
 
 function upperFirstLetter(str) {
     const c = str.charAt(0).toUpperCase() + str.slice(1);
     return c;
 }
 
-if(!full_name || arr_full_name[0] == null || arr_full_name[1] == null || 
-	arr_full_name[0] == "" || arr_full_name[1] == "" || arr_full_name[2] != null) {
-	
-	alert(error);
-	console.log(error);
-	exit();
+function isValid(string) {
+	var i = 0;
+    while(i < string.length) {
+        if(isNaN(string[i] == false) || !isLetter(string[i])) {
+            return null;
+		}
+		i++;
+    }
+    return 1;
 }
 
-var i = 0;
-while(i < arr_full_name[0].length) {
-	if(isNaN(full_name[i]) == false ||
-		!(arr_full_name[0].charCodeAt(i) >= 65 && arr_full_name[0].charCodeAt(i) <= 90)) {
-		alert(error);
-		console.log(error);
-		exit();
-	}
-	i++;
-}
-i = 0;
-while(i < arr_full_name[1].length) {
-	if(isNaN(full_name[i]) == false ||
-		!(arr_full_name[0].charCodeAt(i) >= 97 && arr_full_name[0].charCodeAt(i) <= 122)) {
-		alert(error);
-		console.log(error);
-		exit();
-	}
-	i++;
+function isLetter(c) {
+	return c.toLowerCase() != c.toUpperCase();
 }
 
-var greetings = "Greetings, " + upperFirstLetter(arr_full_name[0]) + " " + upperFirstLetter(arr_full_name[1]) + "!"
-
-alert(greetings);
-console.log(greetings);
+function greetings(name, surname) {
+    var greetings = "Greetings, " + upperFirstLetter(name) + " " + upperFirstLetter(surname) + "!"
+    alert(greetings);
+    console.log(greetings);
+}
